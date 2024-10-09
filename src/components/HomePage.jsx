@@ -59,7 +59,7 @@ const Header = () => (
     transition={{ duration: 0.8, ease: "easeOut" }}
   >
     <motion.h1 
-      className="text-xl sm:text-2xl font-light tracking-wider text-gold-300 mb-4 sm:mb-0"
+      className="text-xl sm:text-2xl font-light tracking-wider text-white mb-4 sm:mb-0"
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 300 }}
     >
@@ -401,7 +401,7 @@ const Newsletter = () => (
         <input 
           type="email" 
           placeholder="Your email address" 
-          className="w-full sm:w-auto px-4 sm:px-6 py-3 sm:py-4 rounded-full text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-gold-300 transition duration-300 text-center sm:text-left"
+          className="w-full sm:w-auto px-4 sm:px-6 py-3 sm:py-4 rounded-full text-black placeholder-black bg-white focus:outline-none focus:ring-2 focus:ring-gold-300 transition duration-300 text-center sm:text-left"
         />
         <motion.button
           className="w-full sm:w-auto bg-gold-500 text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-gold-400 transition duration-300 uppercase tracking-wider shadow-lg text-sm sm:text-base"
