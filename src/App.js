@@ -4,6 +4,8 @@ import HomePage from './components/HomePage';
 import AboutPage from './components/AboutPage';
 import LocationsPage from './components/LocationsPage';
 import LocationDetailPage from './components/LocationDetailPage';
+import SlotMachinesPage from './components/SlotMachinesPage';
+import ContactPage from './components/ContactPage';
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/locations" element={<LocationsPage />} />
         <Route path="/locations/:id" element={<LocationDetailPage />} />
+        <Route path="/machines" element={<SlotMachinesPage />} />
+        <Route path="/contact" element={<ContactPage />} />
       </Routes>
     </Router>
   );

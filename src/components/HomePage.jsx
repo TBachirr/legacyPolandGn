@@ -73,8 +73,8 @@ const Header = () => (
         {[
           { name: "À propos", path: "/about" },
           { name: "Emplacements", path: "/locations" },
-          { name: "Machines", path: "#machines" },
-          { name: "Contact", path: "#contact" }
+          { name: "Machines", path: "/machines" },
+          { name: "Contact", path: "/contact" }
         ].map((item, index) => (
           <motion.li key={item.name}
             className="mx-2 sm:mx-0 my-2 sm:my-0"
@@ -82,15 +82,9 @@ const Header = () => (
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
-            {item.path.startsWith('#') ? (
-              <a href={item.path} className="text-sm uppercase tracking-wider hover:text-gray-300 transition duration-300">
-                {item.name}
-              </a>
-            ) : (
-              <Link to={item.path} className="text-sm uppercase tracking-wider hover:text-gray-300 transition duration-300">
-                {item.name}
-              </Link>
-            )}
+            <Link to={item.path} className="text-sm uppercase tracking-wider hover:text-gray-300 transition duration-300">
+              {item.name}
+            </Link>
           </motion.li>
         ))}
       </ul>
@@ -456,10 +450,10 @@ const Footer = () => (
         <div>
           <h3 className="text-white text-xl font-light mb-6 pb-2 border-b border-gold-500 inline-block">Liens Rapides</h3>
           <ul className="space-y-3">
-            <li><a href="/about" className="hover:text-gold-500 transition duration-300 text-sm">À Propos de Nous</a></li>
-            <li><a href="/locations" className="hover:text-gold-500 transition duration-300 text-sm">Nos Emplacements</a></li>
-            <li><a href="/machines" className="hover:text-gold-500 transition duration-300 text-sm">Machines de Jeu</a></li>
-            <li><a href="/contact" className="hover:text-gold-500 transition duration-300 text-sm">Contactez-nous</a></li>
+            <li><Link to="/about" className="hover:text-gold-500 transition duration-300 text-sm">À Propos de Nous</Link></li>
+            <li><Link to="/locations" className="hover:text-gold-500 transition duration-300 text-sm">Nos Emplacements</Link></li>
+            <li><Link to="/machines" className="hover:text-gold-500 transition duration-300 text-sm">Machines de Jeu</Link></li>
+            <li><Link to="/contact" className="hover:text-gold-500 transition duration-300 text-sm">Contactez-nous</Link></li>
           </ul>
         </div>
         <div>
@@ -471,13 +465,12 @@ const Footer = () => (
           </ul>
         </div>
         <div>
-          <h3 className="text-white text-xl font-light mb-6 pb-2 border-b border-gold-500 inline-block">Connectez-vous avec Nous</h3>
-          <div className="flex justify-start pl-8 mb-6">
+          <h3 className="text-white text-xl font-light mb-6 pb-2 border-b border-gold-500 inline-block">Nos Réseaux Sociaux</h3>
+          <div className="flex justify-start mb-6">
             {[
               { icon: FaFacebookF, link: "https://facebook.com" },
               { icon: FaTwitter, link: "https://twitter.com" },
               { icon: FaInstagram, link: "https://instagram.com" },
-              { icon: FaLinkedinIn, link: "https://linkedin.com" },
               { icon: FaYoutube, link: "https://youtube.com" }
             ].map((social, index) => (
               <a 
@@ -485,7 +478,7 @@ const Footer = () => (
                 href={social.link} 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="text-gray-400 hover:text-gold-500 transition duration-300 mr-4"
+                className="text-gray-400 hover:text-gold-500 transition duration-300 mr-6"
               >
                 <social.icon size={24} />
               </a>
