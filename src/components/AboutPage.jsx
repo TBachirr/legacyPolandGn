@@ -143,21 +143,21 @@ const TeamSection = () => (
   </section>
 );
 
+const AnimatedNumber = ({ n }) => {
+  const { number } = useSpring({
+    from: { number: 0 },
+    number: n,
+    delay: 200,
+    config: { mass: 1, tension: 20, friction: 10, duration: 2000 }, // Added duration for slower animation
+  });
+  return <animated.span>{number.to((n) => n.toFixed(0))}</animated.span>;
+};
+
 const Achievements = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
-
-  const AnimatedNumber = ({ n }) => {
-    const { number } = useSpring({
-      from: { number: 0 },
-      number: n,
-      delay: 200,
-      config: { mass: 1, tension: 20, friction: 10 },
-    });
-    return <animated.span>{number.to((n) => n.toFixed(0))}</animated.span>;
-  };
 
   const achievements = [
     { number: 15, text: "Années d'Excellence" },

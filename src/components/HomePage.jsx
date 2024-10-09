@@ -59,18 +59,20 @@ const Header = () => (
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.8, ease: "easeOut" }}
   >
-    <motion.h1 
-      className="text-xl sm:text-2xl font-light tracking-wider text-white mb-4 sm:mb-0"
-      whileHover={{ scale: 1.05 }}
-      transition={{ type: "spring", stiffness: 300 }}
-    >
-      LegacyPolandGN
-    </motion.h1>
+    <Link to="/">
+      <motion.h1 
+        className="text-xl sm:text-2xl font-light tracking-wider text-white mb-4 sm:mb-0 cursor-pointer"
+        whileHover={{ scale: 1.05 }}
+        transition={{ type: "spring", stiffness: 300 }}
+      >
+        LegacyPolandGN
+      </motion.h1>
+    </Link>
     <nav className="w-full sm:w-auto">
       <ul className="flex flex-wrap justify-center sm:space-x-8">
         {[
           { name: "À propos", path: "/about" },
-          { name: "Emplacements", path: "#emplacements" },
+          { name: "Emplacements", path: "/locations" },
           { name: "Machines", path: "#machines" },
           { name: "Contact", path: "#contact" }
         ].map((item, index) => (
@@ -96,51 +98,56 @@ const Header = () => (
   </motion.header>
 );
 
-const Hero = () => (
-  <motion.section
-    className="min-h-screen flex flex-col justify-center items-center text-center text-white bg-cover bg-center relative px-4 py-20 sm:py-0"
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ duration: 1.5 }}
-    style={{
-      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://img.freepik.com/free-photo/living-room-with-couch_1048-2488.jpg?t=st=1728425330~exp=1728428930~hmac=c258066c60001e19c2d5ddb88c97277c8ed4d4031307d6eded9e9daa00495c81&w=900')`
-    }}
-  >
-    <motion.div 
-      className="z-10 max-w-3xl px-4 sm:px-6 lg:px-8"
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1, delay: 0.5 }}
+const Hero = () => {
+  const navigate = useNavigate();
+
+  return (
+    <motion.section
+      className="min-h-screen flex flex-col justify-center items-center text-center text-white bg-cover bg-center relative px-4 py-20 sm:py-0"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1.5 }}
+      style={{
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://img.freepik.com/free-photo/living-room-with-couch_1048-2488.jpg?t=st=1728425330~exp=1728428930~hmac=c258066c60001e19c2d5ddb88c97277c8ed4d4031307d6eded9e9daa00495c81&w=900')`
+      }}
     >
-      <motion.h2 
-        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-6 text-white tracking-wide"
-        initial={{ opacity: 0, y: 20 }}
+      <motion.div 
+        className="z-10 max-w-3xl px-4 sm:px-6 lg:px-8"
+        initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.8 }}
+        transition={{ duration: 1, delay: 0.5 }}
       >
-        Élevez Votre Expérience de Jeu
-      </motion.h2>
-      <motion.p 
-        className="text-lg sm:text-xl lg:text-2xl mb-12 font-light"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 1 }}
-      >
-        Plongez dans un cadre opulent et un divertissement palpitant
-      </motion.p>
-      <motion.button
-        className="w-full sm:w-auto bg-gold-500 text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-gold-400 transition duration-300 uppercase tracking-wider shadow-lg text-sm sm:text-base"
-        whileHover={{ scale: 1.05, boxShadow: "0px 0px 20px rgba(255,215,0,0.5)" }}
-        whileTap={{ scale: 0.95 }}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 1.2 }}
-      >
-        Explorez Nos Établissements
-      </motion.button>
-    </motion.div>
-  </motion.section>
-);
+        <motion.h2 
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-6 text-white tracking-wide"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+        >
+          Élevez Votre Expérience de Jeu
+        </motion.h2>
+        <motion.p 
+          className="text-lg sm:text-xl lg:text-2xl mb-12 font-light"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1 }}
+        >
+          Plongez dans un cadre opulent et un divertissement palpitant
+        </motion.p>
+        <motion.button
+          className="w-full sm:w-auto bg-gold-500 text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-gold-400 transition duration-300 uppercase tracking-wider shadow-lg text-sm sm:text-base"
+          whileHover={{ scale: 1.05, boxShadow: "0px 0px 20px rgba(255,215,0,0.5)" }}
+          whileTap={{ scale: 0.95 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
+          onClick={() => navigate('/locations')}
+        >
+          Explorez Nos Établissements
+        </motion.button>
+      </motion.div>
+    </motion.section>
+  );
+};
 
 const About = () => {
   const navigate = useNavigate();
@@ -169,7 +176,7 @@ const About = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <h3 className="text-2xl font-light mb-4 text-white">{item.title}</h3>
+              <h3 className="text-2xl font-light mb-4 text-gold-500">{item.title}</h3>
               <p className="text-gray-400 text-lg leading-relaxed">{item.description}</p>
             </motion.div>
           ))}
@@ -198,58 +205,64 @@ const About = () => {
   );
 };
 
-const FeaturedLocations = () => (
-  <section id="emplacements" className="py-20 px-4 sm:px-6 bg-black">
-    <div className="max-w-6xl mx-auto">
-      <h2 className="text-4xl sm:text-5xl font-light mb-16 text-center text-white tracking-wider">Destinations Exquises</h2>
-      <div className="space-y-16">
-        {[
-          { name: 'Élégance Côtière', image: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1025&q=80' },
-          { name: 'Retraite Montagnarde', image: 'https://images.unsplash.com/photo-1518602164578-cd0074062767?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80' },
-          { name: 'Oasis Urbaine', image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80' },
-        ].map((location, index) => (
-          <motion.div
-            key={location.name}
-            className="flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-8"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: index * 0.2 }}
+const FeaturedLocations = () => {
+  const navigate = useNavigate();
+
+  return (
+    <section id="emplacements" className="py-20 px-4 sm:px-6 bg-black">
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-4xl sm:text-5xl font-light mb-16 text-center text-white tracking-wider">Destinations Exquises</h2>
+        <div className="space-y-16">
+          {[
+            { id: 'elegance-cotiere', name: 'Élégance Côtière', image: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1025&q=80' },
+            { id: 'retraite-montagnarde', name: 'Retraite Montagnarde', image: 'https://images.unsplash.com/photo-1518602164578-cd0074062767?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80' },
+            { id: 'oasis-urbaine', name: 'Oasis Urbaine', image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80' },
+          ].map((location, index) => (
+            <motion.div
+              key={location.name}
+              className="flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-8"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: index * 0.2 }}
+            >
+              <div className="w-full md:w-3/5 overflow-hidden">
+                <motion.img 
+                  src={location.image} 
+                  alt={location.name} 
+                  className="w-full h-[40vh] object-cover"
+                  whileHover={{ scale: 1.03 }}
+                  transition={{ duration: 0.5 }}
+                />
+              </div>
+              <div className="w-full md:w-2/5 text-center md:text-left">
+                <h3 className="text-2xl sm:text-3xl font-light mb-4 text-white tracking-wide">{location.name}</h3>
+                <p className="text-gray-400 mb-6 leading-relaxed text-sm">Vivez un luxe et une excitation inégalés dans notre établissement {location.name}. Plongez dans un monde d'opulence et de divertissement palpitant.</p>
+                <motion.button
+                  className="inline-block py-2 px-6 bg-transparent border border-gold-500 text-gold-500 text-xs uppercase tracking-widest font-light hover:bg-gold-500 hover:text-black transition-all duration-300 ease-in-out"
+                  whileHover={{ scale: 1.05, boxShadow: "0px 0px 10px rgba(212,175,55,0.5)" }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => navigate(`/locations/${location.id}`)}
+                >
+                  Explorer
+                </motion.button>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+        <div className="text-center mt-20">
+          <motion.button
+            className="py-3 px-8 bg-gold-500 text-black text-sm uppercase tracking-widest font-light hover:bg-transparent hover:text-gold-500 border-2 border-gold-500 transition-all duration-300 ease-in-out"
+            whileHover={{ scale: 1.05, boxShadow: "0px 0px 15px rgba(212,175,55,0.7)" }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => navigate('/locations')}
           >
-            <div className="w-full md:w-3/5 overflow-hidden">
-              <motion.img 
-                src={location.image} 
-                alt={location.name} 
-                className="w-full h-[40vh] object-cover"
-                whileHover={{ scale: 1.03 }}
-                transition={{ duration: 0.5 }}
-              />
-            </div>
-            <div className="w-full md:w-2/5 text-center md:text-left">
-              <h3 className="text-2xl sm:text-3xl font-light mb-4 text-white tracking-wide">{location.name}</h3>
-              <p className="text-gray-400 mb-6 leading-relaxed text-sm">Vivez un luxe et une excitation inégalés dans notre établissement {location.name}. Plongez dans un monde d'opulence et de divertissement palpitant.</p>
-              <motion.button
-                className="inline-block py-2 px-6 bg-transparent border border-gold-500 text-gold-500 text-xs uppercase tracking-widest font-light hover:bg-gold-500 hover:text-black transition-all duration-300 ease-in-out"
-                whileHover={{ scale: 1.05, boxShadow: "0px 0px 10px rgba(212,175,55,0.5)" }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Explorer
-              </motion.button>
-            </div>
-          </motion.div>
-        ))}
+            Voir Toutes les Destinations
+          </motion.button>
+        </div>
       </div>
-      <div className="text-center mt-20">
-        <motion.button
-          className="py-3 px-8 bg-gold-500 text-black text-sm uppercase tracking-widest font-light hover:bg-transparent hover:text-gold-500 border-2 border-gold-500 transition-all duration-300 ease-in-out"
-          whileHover={{ scale: 1.05, boxShadow: "0px 0px 15px rgba(212,175,55,0.7)" }}
-          whileTap={{ scale: 0.98 }}
-        >
-          Voir Toutes les Destinations
-        </motion.button>
-      </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 const SlotMachines = () => (
   <section id="machines" className="py-16 sm:py-24 px-4 sm:px-8 bg-gray-900">
