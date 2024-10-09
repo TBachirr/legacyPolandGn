@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaYoutube } from 'react-icons/fa';
 
 const AnimatedSection = ({ children }) => {
   const [ref, inView] = useInView({
@@ -120,7 +121,7 @@ const About = () => (
   <section id="about" className="py-32 px-8 bg-black">
     <div className="max-w-5xl mx-auto">
       <motion.h2 
-        className="text-4xl sm:text-5xl font-light mb-20 text-center text-gold-400 tracking-wider"
+        className="text-4xl sm:text-5xl font-light mb-20 text-center text-white tracking-wider"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -140,7 +141,7 @@ const About = () => (
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
-            <h3 className="text-2xl font-light mb-4 text-gold-500">{item.title}</h3>
+            <h3 className="text-2xl font-light mb-4 text-white">{item.title}</h3>
             <p className="text-gray-400 text-lg leading-relaxed">{item.description}</p>
           </motion.div>
         ))}
@@ -397,9 +398,6 @@ const Newsletter = () => (
           Subscribe
         </motion.button>
       </motion.form>
-      <p className="mt-8 text-sm text-gray-400">
-        By subscribing, you agree to our <a href="/privacy" className="underline hover:text-white transition duration-300">Privacy Policy</a> and <a href="/terms" className="underline hover:text-white transition duration-300">Terms of Service</a>.
-      </p>
     </div>
   </section>
 );
@@ -422,14 +420,20 @@ const Footer = () => (
       <div>
         <h3 className="text-white text-lg font-light mb-4">Connect With Us</h3>
         <div className="flex space-x-4">
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition duration-300">
-            <i className="fab fa-facebook-f"></i>
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition duration-300">
+            <FaFacebookF size={24} />
           </a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition duration-300">
-            <i className="fab fa-twitter"></i>
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition duration-300">
+            <FaTwitter size={24} />
           </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition duration-300">
-            <i className="fab fa-instagram"></i>
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition duration-300">
+            <FaInstagram size={24} />
+          </a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition duration-300">
+            <FaLinkedinIn size={24} />
+          </a>
+          <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition duration-300">
+            <FaYoutube size={24} />
           </a>
         </div>
       </div>
