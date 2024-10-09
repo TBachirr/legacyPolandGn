@@ -2,6 +2,7 @@ import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaYoutube } from 'react-icons/fa';
+import { Link, useNavigate } from 'react-router-dom';
 
 const AnimatedSection = ({ children }) => {
   const [ref, inView] = useInView({
@@ -67,16 +68,27 @@ const Header = () => (
     </motion.h1>
     <nav className="w-full sm:w-auto">
       <ul className="flex flex-wrap justify-center sm:space-x-8">
-        {["About", "Locations", "Machines", "Contact"].map((item, index) => (
-          <motion.li key={item}
+        {[
+          { name: "À propos", path: "/about" },
+          { name: "Emplacements", path: "#emplacements" },
+          { name: "Machines", path: "#machines" },
+          { name: "Contact", path: "#contact" }
+        ].map((item, index) => (
+          <motion.li key={item.name}
             className="mx-2 sm:mx-0 my-2 sm:my-0"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
-            <a href={`#${item.toLowerCase()}`} className="text-sm uppercase tracking-wider hover:text-gray-300 transition duration-300">
-              {item}
-            </a>
+            {item.path.startsWith('#') ? (
+              <a href={item.path} className="text-sm uppercase tracking-wider hover:text-gray-300 transition duration-300">
+                {item.name}
+              </a>
+            ) : (
+              <Link to={item.path} className="text-sm uppercase tracking-wider hover:text-gray-300 transition duration-300">
+                {item.name}
+              </Link>
+            )}
           </motion.li>
         ))}
       </ul>
@@ -106,7 +118,7 @@ const Hero = () => (
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.8 }}
       >
-        Elevate Your Gaming Experience
+        Élevez Votre Expérience de Jeu
       </motion.h2>
       <motion.p 
         className="text-lg sm:text-xl lg:text-2xl mb-12 font-light"
@@ -114,7 +126,7 @@ const Hero = () => (
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 1 }}
       >
-        Indulge in opulent surroundings and thrilling entertainment
+        Plongez dans un cadre opulent et un divertissement palpitant
       </motion.p>
       <motion.button
         className="w-full sm:w-auto bg-gold-500 text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-gold-400 transition duration-300 uppercase tracking-wider shadow-lg text-sm sm:text-base"
@@ -124,72 +136,77 @@ const Hero = () => (
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 1.2 }}
       >
-        Explore Venues
+        Explorez Nos Établissements
       </motion.button>
     </motion.div>
   </motion.section>
 );
 
-const About = () => (
-  <section id="about" className="py-32 px-8 bg-black">
-    <div className="max-w-5xl mx-auto">
-      <motion.h2 
-        className="text-4xl sm:text-5xl font-light mb-20 text-center text-white tracking-wider"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        Our Commitment to Excellence
-      </motion.h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-        {[
-          { title: "Unparalleled Luxury", description: "Immerse yourself in opulent surroundings designed to elevate your gaming experience." },
-          { title: "Cutting-Edge Technology", description: "Experience the latest in gaming innovation with our state-of-the-art machines and systems." },
-          { title: "Exceptional Service", description: "Our highly trained staff is dedicated to providing personalized, attentive service to every guest." }
-        ].map((item, index) => (
-          <motion.div 
-            key={index}
-            className="text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-          >
-            <h3 className="text-2xl font-light mb-4 text-white">{item.title}</h3>
-            <p className="text-gray-400 text-lg leading-relaxed">{item.description}</p>
-          </motion.div>
-        ))}
-      </div>
-      <motion.div 
-        className="mt-20 text-center"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.5 }}
-      >
-        <p className="text-xl text-gray-300 leading-relaxed mb-8 max-w-3xl mx-auto">
-          At LegacyPolandGN, we redefine luxury gaming. Our venues blend sophisticated ambiance with cutting-edge technology, 
-          offering an unparalleled experience for the discerning player.
-        </p>
-        <motion.button
-          className="py-3 px-8 bg-transparent border border-gold-500 text-gold-500 text-sm uppercase tracking-widest font-light hover:bg-gold-500 hover:text-black transition-all duration-300 ease-in-out"
-          whileHover={{ scale: 1.05, boxShadow: "0px 0px 15px rgba(212,175,55,0.3)" }}
-          whileTap={{ scale: 0.98 }}
+const About = () => {
+  const navigate = useNavigate();
+
+  return (
+    <section id="a-propos" className="py-32 px-8 bg-black">
+      <div className="max-w-5xl mx-auto">
+        <motion.h2 
+          className="text-4xl sm:text-5xl font-light mb-20 text-center text-white tracking-wider"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
         >
-          Discover More
-        </motion.button>
-      </motion.div>
-    </div>
-  </section>
-);
+          Notre Engagement envers l'Excellence
+        </motion.h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          {[
+            { title: "Luxe Inégalé", description: "Immergez-vous dans un cadre opulent conçu pour élever votre expérience de jeu." },
+            { title: "Technologie de Pointe", description: "Découvrez les dernières innovations en matière de jeu avec nos machines et systèmes à la pointe de la technologie." },
+            { title: "Service Exceptionnel", description: "Notre personnel hautement qualifié est dédié à fournir un service personnalisé et attentif à chaque invité." }
+          ].map((item, index) => (
+            <motion.div 
+              key={index}
+              className="text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <h3 className="text-2xl font-light mb-4 text-white">{item.title}</h3>
+              <p className="text-gray-400 text-lg leading-relaxed">{item.description}</p>
+            </motion.div>
+          ))}
+        </div>
+        <motion.div 
+          className="mt-20 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+        >
+          <p className="text-xl text-gray-300 leading-relaxed mb-8 max-w-3xl mx-auto">
+            Chez LegacyPolandGN, nous redéfinissons le jeu de luxe. Nos établissements allient une ambiance sophistiquée à une technologie de pointe, 
+            offrant une expérience inégalée pour le joueur exigeant.
+          </p>
+          <motion.button
+            className="py-3 px-8 bg-transparent border border-gold-500 text-gold-500 text-sm uppercase tracking-widest font-light hover:bg-gold-500 hover:text-black transition-all duration-300 ease-in-out"
+            whileHover={{ scale: 1.05, boxShadow: "0px 0px 15px rgba(212,175,55,0.3)" }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => navigate('/about')}
+          >
+            En Savoir Plus
+          </motion.button>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
 
 const FeaturedLocations = () => (
-  <section id="locations" className="py-20 px-4 sm:px-6 bg-black">
+  <section id="emplacements" className="py-20 px-4 sm:px-6 bg-black">
     <div className="max-w-6xl mx-auto">
-      <h2 className="text-4xl sm:text-5xl font-light mb-16 text-center text-white tracking-wider">Exquisite Destinations</h2>
+      <h2 className="text-4xl sm:text-5xl font-light mb-16 text-center text-white tracking-wider">Destinations Exquises</h2>
       <div className="space-y-16">
         {[
-          { name: 'Coastal Elegance', image: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1025&q=80' },
-          { name: 'Mountain Retreat', image: 'https://images.unsplash.com/photo-1518602164578-cd0074062767?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80' },
-          { name: 'Urban Oasis', image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80' },
+          { name: 'Élégance Côtière', image: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1025&q=80' },
+          { name: 'Retraite Montagnarde', image: 'https://images.unsplash.com/photo-1518602164578-cd0074062767?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80' },
+          { name: 'Oasis Urbaine', image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80' },
         ].map((location, index) => (
           <motion.div
             key={location.name}
@@ -209,13 +226,13 @@ const FeaturedLocations = () => (
             </div>
             <div className="w-full md:w-2/5 text-center md:text-left">
               <h3 className="text-2xl sm:text-3xl font-light mb-4 text-white tracking-wide">{location.name}</h3>
-              <p className="text-gray-400 mb-6 leading-relaxed text-sm">Experience unparalleled luxury and excitement at our {location.name} venue. Immerse yourself in a world of opulence and thrilling entertainment.</p>
+              <p className="text-gray-400 mb-6 leading-relaxed text-sm">Vivez un luxe et une excitation inégalés dans notre établissement {location.name}. Plongez dans un monde d'opulence et de divertissement palpitant.</p>
               <motion.button
                 className="inline-block py-2 px-6 bg-transparent border border-gold-500 text-gold-500 text-xs uppercase tracking-widest font-light hover:bg-gold-500 hover:text-black transition-all duration-300 ease-in-out"
                 whileHover={{ scale: 1.05, boxShadow: "0px 0px 10px rgba(212,175,55,0.5)" }}
                 whileTap={{ scale: 0.98 }}
               >
-                Explore
+                Explorer
               </motion.button>
             </div>
           </motion.div>
@@ -227,7 +244,7 @@ const FeaturedLocations = () => (
           whileHover={{ scale: 1.05, boxShadow: "0px 0px 15px rgba(212,175,55,0.7)" }}
           whileTap={{ scale: 0.98 }}
         >
-          View All Destinations
+          Voir Toutes les Destinations
         </motion.button>
       </div>
     </div>
@@ -236,12 +253,12 @@ const FeaturedLocations = () => (
 
 const SlotMachines = () => (
   <section id="machines" className="py-16 sm:py-24 px-4 sm:px-8 bg-gray-900">
-    <h2 className="text-3xl font-light mb-10 sm:mb-12 text-center text-white tracking-wide">Premium Gaming Machines</h2>
+    <h2 className="text-3xl font-light mb-10 sm:mb-12 text-center text-white tracking-wide">Machines de Jeu Premium</h2>
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12 max-w-6xl mx-auto">
       {[
-        { name: 'Golden Fortune', image: 'https://images.unsplash.com/photo-1596838132731-3301c3fd4317?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80' },
-        { name: 'Royal Flush', image: 'https://images.unsplash.com/photo-1521364577880-a15e92cbff6f?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-        { name: 'Diamond Deluxe', image: 'https://images.unsplash.com/photo-1582656975064-04e9452fc60e?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+        { name: 'Fortune Dorée', image: 'https://images.unsplash.com/photo-1596838132731-3301c3fd4317?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80' },
+        { name: 'Quinte Flush Royale', image: 'https://images.unsplash.com/photo-1521364577880-a15e92cbff6f?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+        { name: 'Diamant Deluxe', image: 'https://images.unsplash.com/photo-1582656975064-04e9452fc60e?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
       ].map((slot, index) => (
         <motion.div
           key={slot.name}
@@ -254,7 +271,7 @@ const SlotMachines = () => (
           <img src={slot.image} alt={slot.name} className="w-full h-64 object-cover" />
           <div className="p-6">
             <h3 className="text-xl font-light mb-2 text-white">{slot.name}</h3>
-            <p className="text-gray-400 text-sm">Experience the thrill of our state-of-the-art {slot.name} machine.</p>
+            <p className="text-gray-400 text-sm">Vivez le frisson de notre machine {slot.name} à la pointe de la technologie.</p>
           </div>
         </motion.div>
       ))}
@@ -266,27 +283,27 @@ const Testimonials = () => {
   const testimonials = [
     { 
       name: "James R.", 
-      text: `An unparalleled blend of luxury and excitement. LegacyPolandGN has redefined my gaming expectations. The attention to detail in every aspect of the experience is truly remarkable.`
+      text: `Un mélange inégalé de luxe et d'excitation. LegacyPolandGN a redéfini mes attentes en matière de jeu. L'attention portée aux détails dans tous les aspects de l'expérience est vraiment remarquable.`
     },
     { 
       name: "Emily S.", 
-      text: `The attention to detail and impeccable service make every visit a truly memorable experience. From the moment I step in, I feel transported to a world of opulence and excitement.`
+      text: `L'attention aux détails et le service impeccable font de chaque visite une expérience vraiment mémorable. Dès que j'entre, je me sens transportée dans un monde d'opulence et d'excitation.`
     },
     { 
       name: "Michael T.", 
-      text: `LegacyPolandGN offers a gaming experience like no other. The ambiance, the games, and the service are all top-notch. It's my go-to destination for a night of luxury and thrill.`
+      text: `LegacyPolandGN offre une expérience de jeu unique. L'ambiance, les jeux et le service sont tous de premier ordre. C'est ma destination de prédilection pour une soirée de luxe et de frissons.`
     },
     { 
       name: "Sophia L.", 
-      text: `I'm consistently impressed by the level of sophistication at LegacyPolandGN. The attention to detail in the décor and the professionalism of the staff create an unmatched atmosphere.`
+      text: `Je suis constamment impressionnée par le niveau de sophistication chez LegacyPolandGN. L'attention portée aux détails dans la décoration et le professionnalisme du personnel créent une atmosphère inégalée.`
     },
     { 
       name: "Robert K.", 
-      text: `As a frequent traveler, I've experienced many high-end venues, but LegacyPolandGN stands out. The blend of classic elegance and modern gaming is perfectly executed.`
+      text: `En tant que voyageur fréquent, j'ai expérimenté de nombreux établissements haut de gamme, mais LegacyPolandGN se démarque. Le mélange d'élégance classique et de jeu moderne est parfaitement exécuté.`
     },
     { 
       name: "Isabella M.", 
-      text: `Every visit to LegacyPolandGN feels special. The exclusive events, the personalized service, and the overall luxurious environment keep me coming back for more.`
+      text: `Chaque visite à LegacyPolandGN est spéciale. Les événements exclusifs, le service personnalisé et l'environnement luxueux global me font revenir encore et encore.`
     }
   ];
 
@@ -330,7 +347,7 @@ const Testimonials = () => {
   return (
     <section className="py-20 px-4 sm:px-6 bg-black">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-4xl sm:text-5xl font-light mb-16 text-center text-white tracking-wider">Guest Experiences</h2>
+        <h2 className="text-4xl sm:text-5xl font-light mb-16 text-center text-white tracking-wider">Expériences de nos Invités</h2>
         <div className="relative h-80 overflow-hidden">
           <AnimatePresence initial={false} custom={direction}>
             <motion.div
@@ -358,7 +375,7 @@ const Testimonials = () => {
             onClick={handlePrev}
             className="text-gold-500 hover:text-gold-400 transition-colors duration-300"
           >
-            &#8592; Previous
+            &#8592; Précédent
           </button>
           <div className="flex space-x-2">
             {testimonials.map((_, index) => (
@@ -376,7 +393,7 @@ const Testimonials = () => {
             onClick={handleNext}
             className="text-gold-500 hover:text-gold-400 transition-colors duration-300"
           >
-            Next &#8594;
+            Suivant &#8594;
           </button>
         </div>
       </div>
@@ -390,8 +407,8 @@ const Newsletter = () => (
       <div className="absolute inset-0 bg-gradient-to-br from-gold-300 to-gold-600 transform -skew-y-6"></div>
     </div>
     <div className="max-w-4xl mx-auto text-center relative z-10">
-      <h2 className="text-3xl sm:text-4xl font-light mb-4 sm:mb-6 text-white tracking-wide">Stay Connected</h2>
-      <p className="text-lg sm:text-xl text-gray-300 mb-8 sm:mb-10">Join our exclusive community for special offers and event invitations.</p>
+      <h2 className="text-3xl sm:text-4xl font-light mb-4 sm:mb-6 text-white tracking-wide">Restez Connecté</h2>
+      <p className="text-lg sm:text-xl text-gray-300 mb-8 sm:mb-10">Rejoignez notre communauté exclusive pour des offres spéciales et des invitations à des événements.</p>
       <motion.form 
         className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4"
         initial={{ opacity: 0, y: 50 }}
@@ -400,7 +417,7 @@ const Newsletter = () => (
       >
         <input 
           type="email" 
-          placeholder="Your email address" 
+          placeholder="Votre adresse e-mail" 
           className="w-full sm:w-auto px-4 sm:px-6 py-3 sm:py-4 rounded-full text-black placeholder-black bg-white focus:outline-none focus:ring-2 focus:ring-gold-300 transition duration-300 text-center sm:text-left"
         />
         <motion.button
@@ -408,7 +425,7 @@ const Newsletter = () => (
           whileHover={{ scale: 1.05, boxShadow: "0px 0px 20px rgba(255,215,0,0.5)" }}
           whileTap={{ scale: 0.95 }}
         >
-          Subscribe
+          S'abonner
         </motion.button>
       </motion.form>
     </div>
@@ -421,27 +438,27 @@ const Footer = () => (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
         <div>
           <h3 className="text-white text-xl font-light mb-6 pb-2 border-b border-gold-500 inline-block">LegacyPolandGN</h3>
-          <p className="text-sm leading-relaxed">Elevating the art of gaming and luxury entertainment. Experience unparalleled opulence and excitement.</p>
+          <p className="text-sm leading-relaxed">Élevant l'art du jeu et du divertissement de luxe. Vivez une opulence et une excitation inégalées.</p>
         </div>
         <div>
-          <h3 className="text-white text-xl font-light mb-6 pb-2 border-b border-gold-500 inline-block">Quick Links</h3>
+          <h3 className="text-white text-xl font-light mb-6 pb-2 border-b border-gold-500 inline-block">Liens Rapides</h3>
           <ul className="space-y-3">
-            <li><a href="/about" className="hover:text-gold-500 transition duration-300 text-sm">About Us</a></li>
-            <li><a href="/locations" className="hover:text-gold-500 transition duration-300 text-sm">Our Locations</a></li>
-            <li><a href="/machines" className="hover:text-gold-500 transition duration-300 text-sm">Gaming Machines</a></li>
-            <li><a href="/contact" className="hover:text-gold-500 transition duration-300 text-sm">Contact Us</a></li>
+            <li><a href="/about" className="hover:text-gold-500 transition duration-300 text-sm">À Propos de Nous</a></li>
+            <li><a href="/locations" className="hover:text-gold-500 transition duration-300 text-sm">Nos Emplacements</a></li>
+            <li><a href="/machines" className="hover:text-gold-500 transition duration-300 text-sm">Machines de Jeu</a></li>
+            <li><a href="/contact" className="hover:text-gold-500 transition duration-300 text-sm">Contactez-nous</a></li>
           </ul>
         </div>
         <div>
-          <h3 className="text-white text-xl font-light mb-6 pb-2 border-b border-gold-500 inline-block">Legal</h3>
+          <h3 className="text-white text-xl font-light mb-6 pb-2 border-b border-gold-500 inline-block">Légal</h3>
           <ul className="space-y-3">
-            <li><a href="/privacy" className="hover:text-gold-500 transition duration-300 text-sm">Privacy Policy</a></li>
-            <li><a href="/terms" className="hover:text-gold-500 transition duration-300 text-sm">Terms of Service</a></li>
-            <li><a href="/responsible-gaming" className="hover:text-gold-500 transition duration-300 text-sm">Responsible Gaming</a></li>
+            <li><a href="/privacy" className="hover:text-gold-500 transition duration-300 text-sm">Politique de Confidentialité</a></li>
+            <li><a href="/terms" className="hover:text-gold-500 transition duration-300 text-sm">Conditions d'Utilisation</a></li>
+            <li><a href="/responsible-gaming" className="hover:text-gold-500 transition duration-300 text-sm">Jeu Responsable</a></li>
           </ul>
         </div>
         <div>
-          <h3 className="text-white text-xl font-light mb-6 pb-2 border-b border-gold-500 inline-block">Connect With Us</h3>
+          <h3 className="text-white text-xl font-light mb-6 pb-2 border-b border-gold-500 inline-block">Connectez-vous avec Nous</h3>
           <div className="flex justify-start pl-8 mb-6">
             {[
               { icon: FaFacebookF, link: "https://facebook.com" },
@@ -461,13 +478,15 @@ const Footer = () => (
               </a>
             ))}
           </div>
-          <p className="text-sm">Stay updated with our latest news and offers.</p>
+          <p className="text-sm">Restez informé de nos dernières nouvelles et offres.</p>
         </div>
       </div>
       <div className="border-t border-gray-800 pt-8 text-center text-sm">
-        <p>&copy; 2023 LegacyPolandGN. All rights reserved.</p>
-        <p className="mt-2 text-gray-500">Luxurious gaming experiences await you.</p>
+        <p>&copy; 2023 LegacyPolandGN. Tous droits réservés.</p>
+        <p className="mt-2 text-gray-500">Des expériences de jeu luxueuses vous attendent.</p>
       </div>
     </div>
   </footer>
 );
+
+export { Header, Footer, AnimatedSection };
