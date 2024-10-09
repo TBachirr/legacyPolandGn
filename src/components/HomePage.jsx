@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaYoutube } from 'react-icons/fa';
@@ -22,6 +22,19 @@ const AnimatedSection = ({ children }) => {
 };
 
 const HomePage = () => {
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    const scrollToTop = () => {
+      window.scrollTo(0, 0);
+    };
+
+    window.addEventListener('load', scrollToTop);
+    return () => window.removeEventListener('load', scrollToTop);
+  }, []);
+
   return (
     <div className="font-sans text-gray-200 bg-black">
       <Header />
@@ -372,7 +385,7 @@ const Testimonials = () => {
 };
 
 const Newsletter = () => (
-  <section className="py-16 sm:py-24 px-4 sm:px-8 bg-black relative overflow-hidden">
+  <section className="py-16 sm:py-24 px-4 sm:px-8 bg-black relative overflow-hidden mb-16">
     <div className="absolute inset-0 opacity-10">
       <div className="absolute inset-0 bg-gradient-to-br from-gold-300 to-gold-600 transform -skew-y-6"></div>
     </div>
@@ -403,43 +416,58 @@ const Newsletter = () => (
 );
 
 const Footer = () => (
-  <footer className="bg-black text-gray-400 py-10 sm:py-12 px-4 sm:px-8">
-    <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-12">
-      <div>
-        <h3 className="text-white text-lg font-light mb-4">LegacyPolandGN</h3>
-        <p className="text-sm">Elevating the art of gaming and luxury entertainment.</p>
-      </div>
-      <div>
-        <h3 className="text-white text-lg font-light mb-4">Quick Links</h3>
-        <ul className="space-y-2">
-          <li><a href="/privacy" className="hover:text-white transition duration-300 text-sm">Privacy Policy</a></li>
-          <li><a href="/terms" className="hover:text-white transition duration-300 text-sm">Terms of Service</a></li>
-          <li><a href="/contact" className="hover:text-white transition duration-300 text-sm">Contact Us</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3 className="text-white text-lg font-light mb-4">Connect With Us</h3>
-        <div className="flex space-x-4">
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition duration-300">
-            <FaFacebookF size={24} />
-          </a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition duration-300">
-            <FaTwitter size={24} />
-          </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition duration-300">
-            <FaInstagram size={24} />
-          </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition duration-300">
-            <FaLinkedinIn size={24} />
-          </a>
-          <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition duration-300">
-            <FaYoutube size={24} />
-          </a>
+  <footer className="bg-gray-900 text-gray-300 py-16 px-4 sm:px-8">
+    <div className="max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div>
+          <h3 className="text-white text-xl font-light mb-6 pb-2 border-b border-gold-500 inline-block">LegacyPolandGN</h3>
+          <p className="text-sm leading-relaxed">Elevating the art of gaming and luxury entertainment. Experience unparalleled opulence and excitement.</p>
+        </div>
+        <div>
+          <h3 className="text-white text-xl font-light mb-6 pb-2 border-b border-gold-500 inline-block">Quick Links</h3>
+          <ul className="space-y-3">
+            <li><a href="/about" className="hover:text-gold-500 transition duration-300 text-sm">About Us</a></li>
+            <li><a href="/locations" className="hover:text-gold-500 transition duration-300 text-sm">Our Locations</a></li>
+            <li><a href="/machines" className="hover:text-gold-500 transition duration-300 text-sm">Gaming Machines</a></li>
+            <li><a href="/contact" className="hover:text-gold-500 transition duration-300 text-sm">Contact Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 className="text-white text-xl font-light mb-6 pb-2 border-b border-gold-500 inline-block">Legal</h3>
+          <ul className="space-y-3">
+            <li><a href="/privacy" className="hover:text-gold-500 transition duration-300 text-sm">Privacy Policy</a></li>
+            <li><a href="/terms" className="hover:text-gold-500 transition duration-300 text-sm">Terms of Service</a></li>
+            <li><a href="/responsible-gaming" className="hover:text-gold-500 transition duration-300 text-sm">Responsible Gaming</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 className="text-white text-xl font-light mb-6 pb-2 border-b border-gold-500 inline-block">Connect With Us</h3>
+          <div className="flex justify-start pl-8 mb-6">
+            {[
+              { icon: FaFacebookF, link: "https://facebook.com" },
+              { icon: FaTwitter, link: "https://twitter.com" },
+              { icon: FaInstagram, link: "https://instagram.com" },
+              { icon: FaLinkedinIn, link: "https://linkedin.com" },
+              { icon: FaYoutube, link: "https://youtube.com" }
+            ].map((social, index) => (
+              <a 
+                key={index}
+                href={social.link} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-gray-400 hover:text-gold-500 transition duration-300 mr-4"
+              >
+                <social.icon size={24} />
+              </a>
+            ))}
+          </div>
+          <p className="text-sm">Stay updated with our latest news and offers.</p>
         </div>
       </div>
-    </div>
-    <div className="mt-10 sm:mt-12 text-center text-sm">
-      <p>&copy; 2023 LegacyPolandGN. All rights reserved.</p>
+      <div className="border-t border-gray-800 pt-8 text-center text-sm">
+        <p>&copy; 2023 LegacyPolandGN. All rights reserved.</p>
+        <p className="mt-2 text-gray-500">Luxurious gaming experiences await you.</p>
+      </div>
     </div>
   </footer>
 );
