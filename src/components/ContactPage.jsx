@@ -80,7 +80,7 @@ const ContactInfo = () => (
 );
 
 const ContactForm = () => (
-  <section className="py-20 px-4 sm:px-6 bg-gray-900">
+  <section className="py-20 px-4 sm:px-6 bg-black">
     <div className="max-w-3xl mx-auto">
       <h2 className="text-3xl sm:text-4xl font-light mb-12 text-center text-white tracking-wide">Envoyez-nous un Message</h2>
       <form className="space-y-6">
