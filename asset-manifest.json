@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/legacyPolandGn/static/css/main.01bc2dc2.css",
+    "main.js": "/legacyPolandGn/static/js/main.d4b340ad.js",
+    "static/js/453.6fe91cc9.chunk.js": "/legacyPolandGn/static/js/453.6fe91cc9.chunk.js",
+    "index.html": "/legacyPolandGn/index.html",
+    "main.01bc2dc2.css.map": "/legacyPolandGn/static/css/main.01bc2dc2.css.map",
+    "main.d4b340ad.js.map": "/legacyPolandGn/static/js/main.d4b340ad.js.map",
+    "453.6fe91cc9.chunk.js.map": "/legacyPolandGn/static/js/453.6fe91cc9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.01bc2dc2.css",
+    "static/js/main.d4b340ad.js"
+  ]
+}
