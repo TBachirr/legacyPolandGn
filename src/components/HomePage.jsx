@@ -65,7 +65,7 @@ const Header = () => (
         whileHover={{ scale: 1.05 }}
         transition={{ type: "spring", stiffness: 300 }}
       >
-        LegacyPolandGN
+        Legacy Poland
       </motion.h1>
     </Link>
     <nav className="w-full sm:w-auto">
